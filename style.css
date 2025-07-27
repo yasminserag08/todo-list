@@ -30,7 +30,7 @@ button,
   opacity: 0.7;
 }
 
-.add-button 
+.add-button
 {
   width: 5rem;
   border: 0.01rem solid rgb(75, 132, 255);
@@ -41,33 +41,44 @@ button,
   transition: opacity 1ms;
 }
 
-.add-button:hover 
+.add-button:hover,
+.filter-buttons button:hover
 {
   background-color: rgb(75, 132, 255);
   color: white;
 }
 
 .add-button:active,
-.delete-button:active
+.delete-button:active,
+.filter-buttons button:active
 {
   opacity: 0.7;
 }
 
-.delete-button {
-  border: 0.01rem solid rgb(201, 0, 0);
-  border-radius: 0.1rem;
+.filter-buttons 
+{
+  display: flex;
+  width: 25rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  margin: auto;
+}
+
+.filter-buttons button 
+{
+  padding: 0.2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 10px;
+  border: 0.01rem solid rgb(75, 132, 255);
   background-color: white;
-  color: rgb(201, 0, 0);
+  color: rgb(75, 132, 255);
   transition: background-color 1ms;
   transition: color 1ms;
   transition: opacity 1ms;
 }
 
-.delete-button:hover
-{
-  background-color: rgb(201, 0, 0);
-  color: white;
-}
 
 #task-list 
 {
@@ -104,5 +115,22 @@ button,
   position: absolute;
   left: 2px;
   top: -2px;
+}
+
+
+.delete-button {
+  border: 0.01rem solid rgb(201, 0, 0);
+  border-radius: 0.1rem;
+  background-color: white;
+  color: rgb(201, 0, 0);
+  transition: background-color 1ms;
+  transition: color 1ms;
+  transition: opacity 1ms;
+}
+
+.delete-button:hover
+{
+  background-color: rgb(201, 0, 0);
+  color: white;
 }
 
