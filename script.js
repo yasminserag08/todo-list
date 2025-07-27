@@ -61,4 +61,27 @@ function renderTask(task) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   });
 
+  // Add event listener to checkboxes
+  checkbox.addEventListener('change', function() {
+    const li = this.closest('li');
+    const span = li.querySelector('span');
+    span.style.textDecoration = this.checked ? 'line-through' : 'none';
+    if(this.checked) {
+      tasks.forEach(task => {
+        if(task.text == span.textContent) {
+          task.completed = true;
+          localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+      });
+    }
+    else {
+      tasks.forEach(task => {
+        if(task.text == span.textContent) {
+          task.completed = false;
+          localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+      });
+    }
+  });
+
 }

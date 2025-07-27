@@ -97,14 +97,10 @@ button,
   position: relative;
 }
 
-.checkbox:checked
-{
-  background-color:rgb(75, 132, 255);
-} 
 
 .checkbox:checked::after {
   content: '✔';
-  color: white;
+  color: #555;
   position: absolute;
   left: 2px;
   top: -2px;
