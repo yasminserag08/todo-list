@@ -2,6 +2,7 @@
 const taskInput = document.querySelector('#new-task');
 const addButton = document.querySelector('.add-button');
 const taskList = document.querySelector('#task-list');
+const checkbox = document.querySelector('.checkbox');
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -16,12 +17,15 @@ window.addEventListener('DOMContentLoaded', function(event) {
 // Add event listener to the add button
 addButton.addEventListener('click', function(event) {
   // Add task to tasks list
-  const task = taskInput.value;
+  const task = {
+  text: taskInput.value,
+  completed: false
+  };
   tasks.push(task); 
   // Update the localStorage
   localStorage.setItem('tasks', JSON.stringify(tasks));
   // Don't add empty tasks
-  if(task === '') { return; }
+  if(taskInput.value === '') { return; }
   else { renderTask(task); }
 });
 
@@ -41,7 +45,7 @@ function renderTask(task) {
 
   // Create span element for the text content 
   const span = document.createElement('span');
-  span.textContent = task;
+  span.textContent = task.text;
   li.appendChild(span);
 
   // Create a delete button for the task
@@ -56,4 +60,5 @@ function renderTask(task) {
     tasks = tasks.filter(item => item !== task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
   });
+
 }

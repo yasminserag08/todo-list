@@ -78,10 +78,10 @@ button,
 
 #task-list li
 {
-  padding-left: 35rem;
   display: grid;
   grid-template-columns: 1rem 9rem 5rem;
   align-content: center;
+  justify-content: center;
   column-gap: 5rem;
   margin-bottom: 0.2rem;
 }
