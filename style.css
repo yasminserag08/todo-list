@@ -15,7 +15,7 @@ button,
 #new-task
 {
   width: 100%;
-  max-width: 20rem;
+  max-width: 30rem;
   padding-left: 0.5rem;
   border: none;
   background-color: rgb(228, 228, 228);
@@ -50,7 +50,8 @@ input[type="text"]:focus
 }
 
 .add-button:hover,
-.filter-buttons button:hover
+.filter-buttons button:hover,
+#clear-completed:hover
 {
   background-color: rgb(75, 132, 255);
   color: white;
@@ -58,7 +59,8 @@ input[type="text"]:focus
 
 .add-button:active,
 .delete-button:active,
-.filter-buttons button:active
+.filter-buttons button:active,
+#clear-completed:active
 {
   opacity: 0.7;
 }
@@ -71,6 +73,8 @@ input[type="text"]:focus
   font-family: 'DM Sans';
   width: auto;
   padding: 0.5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
   background-color: rgb(227, 236, 255); 
   border: none;
   border-radius: 5%;
@@ -79,7 +83,7 @@ input[type="text"]:focus
 .filter-buttons 
 {
   display: flex;
-  width: 25rem;
+  width: 35rem;
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
@@ -100,6 +104,10 @@ input[type="text"]:focus
   transition: opacity 1ms;
 }
 
+.active-button
+{
+  margin-right: 0.5rem;
+}
 
 #task-list 
 {
@@ -111,7 +119,7 @@ input[type="text"]:focus
 #task-list li
 {
   display: grid;
-  grid-template-columns: 1rem 9rem 5rem;
+  grid-template-columns: 1rem 19rem 5rem;
   align-content: center;
   justify-content: center;
   column-gap: 5rem;
@@ -138,6 +146,10 @@ input[type="text"]:focus
   top: -2px;
 }
 
+span 
+{
+  text-align: center;
+}
 
 .delete-button {
   border: 0.01rem solid rgb(201, 0, 0);
@@ -155,3 +167,18 @@ input[type="text"]:focus
   color: white;
 }
 
+#clear-completed
+{
+  display: block;
+  margin: 0 auto;
+  margin-left: 43%;
+  padding: 0.5rem;
+  border-radius: 5%;
+  width: auto;
+  border: 0.01rem solid rgb(75, 132, 255);
+  background-color: white;
+  color: rgb(75, 132, 255);
+  transition: background-color 1ms;
+  transition: color 1ms;
+  transition: opacity 1ms;
+}

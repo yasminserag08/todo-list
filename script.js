@@ -5,6 +5,7 @@ const taskList = document.querySelector('#task-list');
 const allButton = document.querySelector('.all-button');
 const activeButton = document.querySelector('.active-button');
 const completedButton = document.querySelector('.completed-button');
+const clearCompletedButton = document.querySelector('#clear-completed');
 const taskCount = document.querySelector('#task-count');
 let count = 0;
 
@@ -16,7 +17,8 @@ window.addEventListener('DOMContentLoaded', function(event) {
   tasks.forEach(task => {
     renderTask(task);
   });
-  renderTaskCount(count);
+  renderTaskCount();
+  manageClearCompletedButton();
 });
 
 // Add event listener to the add button
@@ -32,7 +34,7 @@ addButton.addEventListener('click', function(event) {
   // Don't add empty tasks
   if(taskInput.value === '') { return; }
   else { renderTask(task); }
-  renderTaskCount(count);
+  renderTaskCount();
 });
 
 function renderTask(task) {
@@ -66,7 +68,8 @@ function renderTask(task) {
     tasks = tasks.filter(item => item !== task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     if(task.completed) { count--; }
-    renderTaskCount(count);
+    manageClearCompletedButton();
+    renderTaskCount();
   });
 
   // Strikethrough if task is completed
@@ -87,7 +90,8 @@ function renderTask(task) {
         if(task.text == span.textContent) {
           task.completed = true;
           count++;
-          renderTaskCount(count);
+          manageClearCompletedButton();
+          renderTaskCount();
           localStorage.setItem('tasks', JSON.stringify(tasks));
         }
       });
@@ -97,7 +101,8 @@ function renderTask(task) {
         if(task.text == span.textContent) {
           task.completed = false;
           count--;
-          renderTaskCount(count);
+          manageClearCompletedButton();
+          renderTaskCount();
           localStorage.setItem('tasks', JSON.stringify(tasks));
         }
       });
@@ -172,7 +177,7 @@ taskInput.addEventListener('keydown', function(event) {
   }
 });
 
-function renderTaskCount(count)
+function renderTaskCount()
 {
   if(tasks.length == 0)
   {
@@ -190,6 +195,30 @@ function renderTaskCount(count)
   }
 }
 
+clearCompletedButton.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(task.completed) 
+    {
+      tasks = tasks.filter(item => item !== task);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  });
+  tasks.forEach(task => {
+    renderTask(task);
+  });
+  count = 0;
+  manageClearCompletedButton();
+  renderTaskCount();
+});
 
-
-
+function manageClearCompletedButton()
+{
+  if(count === 0)
+  {
+    clearCompletedButton.style.display = 'none';
+  }
+  else {
+    clearCompletedButton.style.display = 'block';
+  }
+}
