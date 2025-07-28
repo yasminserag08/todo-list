@@ -5,6 +5,8 @@ const taskList = document.querySelector('#task-list');
 const allButton = document.querySelector('.all-button');
 const activeButton = document.querySelector('.active-button');
 const completedButton = document.querySelector('.completed-button');
+const taskCount = document.querySelector('#task-count');
+let count = 0;
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -14,6 +16,7 @@ window.addEventListener('DOMContentLoaded', function(event) {
   tasks.forEach(task => {
     renderTask(task);
   });
+  renderTaskCount(count);
 });
 
 // Add event listener to the add button
@@ -29,6 +32,7 @@ addButton.addEventListener('click', function(event) {
   // Don't add empty tasks
   if(taskInput.value === '') { return; }
   else { renderTask(task); }
+  renderTaskCount(count);
 });
 
 function renderTask(task) {
@@ -61,6 +65,8 @@ function renderTask(task) {
     li.remove();
     tasks = tasks.filter(item => item !== task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    if(task.completed) { count--; }
+    renderTaskCount(count);
   });
 
   // Strikethrough if task is completed
@@ -80,6 +86,8 @@ function renderTask(task) {
       tasks.forEach(task => {
         if(task.text == span.textContent) {
           task.completed = true;
+          count++;
+          renderTaskCount(count);
           localStorage.setItem('tasks', JSON.stringify(tasks));
         }
       });
@@ -88,6 +96,8 @@ function renderTask(task) {
       tasks.forEach(task => {
         if(task.text == span.textContent) {
           task.completed = false;
+          count--;
+          renderTaskCount(count);
           localStorage.setItem('tasks', JSON.stringify(tasks));
         }
       });
@@ -158,9 +168,27 @@ taskInput.addEventListener('keydown', function(event) {
   if(key == 'Enter')
   {
     addButton.click();
-    input.blur();
+    taskInput.blur();
   }
 });
+
+function renderTaskCount(count)
+{
+  if(tasks.length == 0)
+  {
+    taskCount.style.display = 'none';
+    return;
+  }
+  taskCount.style.display = 'block';
+  if(count < 0) { count = 0; }
+  else if(count == 1)
+  {
+    taskCount.innerHTML = `1 task completed out of ${tasks.length}`;
+  }
+  else {
+    taskCount.innerHTML = `${count} tasks completed out of ${tasks.length}`;
+  }
+}
 
 
 
