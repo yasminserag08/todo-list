@@ -3,6 +3,9 @@ const taskInput = document.querySelector('#new-task');
 const addButton = document.querySelector('.add-button');
 const taskList = document.querySelector('#task-list');
 const checkbox = document.querySelector('.checkbox');
+const allButton = document.querySelector('.all-button');
+const activeButton = document.querySelector('.active-button');
+const completedButton = document.querySelector('.completed-button');
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -61,7 +64,15 @@ function renderTask(task) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   });
 
-  // Add event listener to checkboxes
+  // Strikethrough if task is completed
+  if(task.completed) {
+    const span = li.querySelector('span');
+    const checkbox = li.querySelector('.checkbox')
+    span.style.textDecoration = 'line-through';
+    checkbox.checked = true;
+  }
+  
+  // Add event listener to each dynamically created checkbox
   checkbox.addEventListener('change', function() {
     const li = this.closest('li');
     const span = li.querySelector('span');
@@ -83,5 +94,26 @@ function renderTask(task) {
       });
     }
   });
-
 }
+
+allButton.addEventListener('click', function() {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    renderTask(task);
+  });
+});
+
+  activeButton.addEventListener('click', function() {
+    taskList.innerHTML = '';
+    tasks.forEach(task => {
+      if(!task.completed) { renderTask(task); }
+    });
+  });
+
+  completedButton.addEventListener('click', function() {
+    taskList.innerHTML = '';
+    tasks.forEach(task => {
+      if(task.completed) { renderTask(task); }
+    })
+  })
+

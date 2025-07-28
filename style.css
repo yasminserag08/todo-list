@@ -15,7 +15,8 @@ button,
 #new-task 
 {
   height: 2rem;
-  width: 20rem;
+  width: 100%;
+  max-width: 20rem;
   padding-left: 0.5rem;
   border: none;
   background-color: rgb(228, 228, 228);
