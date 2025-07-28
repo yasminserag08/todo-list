@@ -2,7 +2,6 @@
 const taskInput = document.querySelector('#new-task');
 const addButton = document.querySelector('.add-button');
 const taskList = document.querySelector('#task-list');
-const checkbox = document.querySelector('.checkbox');
 const allButton = document.querySelector('.all-button');
 const activeButton = document.querySelector('.active-button');
 const completedButton = document.querySelector('.completed-button');
@@ -94,26 +93,75 @@ function renderTask(task) {
       });
     }
   });
+
+  // Add event listener to each dynamically created <span> element
+  span.addEventListener('dblclick', () => {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = span.textContent;
+    li.replaceChild(input, span);
+    input.focus();
+    cancelEdit = false;
+
+    input.addEventListener('blur', () => {
+      if(cancelEdit)
+      {
+        li.replaceChild(span, input);
+        return;
+      }
+      task.text = input.value;
+      span.textContent = input.value;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      li.replaceChild(span, input);
+    });
+
+    input.addEventListener('keydown', function(event) {
+      const key = event.key;
+      if(key == 'Enter')
+      {
+        cancelEdit = false;
+        input.blur();
+      }
+      else if(key == 'Escape')
+      {
+        cancelEdit = true;
+        input.blur();
+      }
+    });
+  });
+
 }
 
-allButton.addEventListener('click', function() {
+allButton.addEventListener('click', () => {
   taskList.innerHTML = '';
   tasks.forEach(task => {
     renderTask(task);
   });
 });
 
-  activeButton.addEventListener('click', function() {
-    taskList.innerHTML = '';
-    tasks.forEach(task => {
-      if(!task.completed) { renderTask(task); }
-    });
+activeButton.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(!task.completed) { renderTask(task); }
   });
+});
 
-  completedButton.addEventListener('click', function() {
-    taskList.innerHTML = '';
-    tasks.forEach(task => {
-      if(task.completed) { renderTask(task); }
-    })
-  })
+completedButton.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(task.completed) { renderTask(task); }
+  });
+});
+
+taskInput.addEventListener('keydown', function(event) {
+  const key = event.key;
+  if(key == 'Enter')
+  {
+    addButton.click();
+    input.blur();
+  }
+});
+
+
+
 
