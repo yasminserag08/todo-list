@@ -183,10 +183,10 @@ function renderTaskCount(count)
   if(count < 0) { count = 0; }
   else if(count == 1)
   {
-    taskCount.innerHTML = `1 task completed out of ${tasks.length}`;
+    taskCount.innerHTML = `1 completed &#x2022; ${tasks.length - 1} left`;
   }
   else {
-    taskCount.innerHTML = `${count} tasks completed out of ${tasks.length}`;
+    taskCount.innerHTML = `${count} completed &#x2022; ${tasks.length - count} left`;
   }
 }
 
