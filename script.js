@@ -7,10 +7,10 @@ const activeButton = document.querySelector('.active-button');
 const completedButton = document.querySelector('.completed-button');
 const clearCompletedButton = document.querySelector('#clear-completed');
 const taskCount = document.querySelector('#task-count');
-let count = 0;
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let completedCount = JSON.parse(localStorage.getItem('completedCount')) || 0;
 
 // Render all tasks in localStorage when DOM loads
 window.addEventListener('DOMContentLoaded', function(event) {
@@ -89,10 +89,11 @@ function renderTask(task) {
       tasks.forEach(task => {
         if(task.text == span.textContent) {
           task.completed = true;
-          count++;
+          completedCount++;
           manageClearCompletedButton();
           renderTaskCount();
           localStorage.setItem('tasks', JSON.stringify(tasks));
+          localStorage.setItem('completedCount', JSON.stringify(completedCount));
         }
       });
     }
@@ -100,10 +101,11 @@ function renderTask(task) {
       tasks.forEach(task => {
         if(task.text == span.textContent) {
           task.completed = false;
-          count--;
+          completedCount--;
           manageClearCompletedButton();
           renderTaskCount();
           localStorage.setItem('tasks', JSON.stringify(tasks));
+          localStorage.setItem('completedCount', JSON.stringify(completedCount));
         }
       });
     }
@@ -185,13 +187,13 @@ function renderTaskCount()
     return;
   }
   taskCount.style.display = 'block';
-  if(count < 0) { count = 0; }
-  else if(count == 1)
+  if(completedCount < 0) { completedCount = 0; }
+  else if(completedCount == 1)
   {
     taskCount.innerHTML = `1 completed &#x2022; ${tasks.length - 1} left`;
   }
   else {
-    taskCount.innerHTML = `${count} completed &#x2022; ${tasks.length - count} left`;
+    taskCount.innerHTML = `${completedCount} completed &#x2022; ${tasks.length - completedCount} left`;
   }
 }
 
@@ -207,14 +209,15 @@ clearCompletedButton.addEventListener('click', () => {
   tasks.forEach(task => {
     renderTask(task);
   });
-  count = 0;
+  completedCount = 0;
   manageClearCompletedButton();
   renderTaskCount();
+  localStorage.setItem('completedCount', JSON.stringify(completedCount));
 });
 
 function manageClearCompletedButton()
 {
-  if(count === 0)
+  if(completedCount === 0)
   {
     clearCompletedButton.style.display = 'none';
   }
