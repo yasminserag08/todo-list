@@ -63,13 +63,21 @@ function renderTask(task) {
   deleteButton.textContent = 'Delete';
 
   // Add functionality for the delete button
-  deleteButton.addEventListener('click', function(event) {
-    li.remove();
-    tasks = tasks.filter(item => item !== task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    if(task.completed) { count--; }
-    manageClearCompletedButton();
-    renderTaskCount();
+  deleteButton.addEventListener('click', async function() {
+    let confirmDelete = await confirmDeletion();
+    if(confirmDelete)
+    {
+      li.remove();
+      tasks = tasks.filter(item => item !== task);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      if(task.completed) 
+      { 
+        completedCount--;
+        localStorage.setItem('completedCount', JSON.stringify(completedCount)); 
+      }
+      manageClearCompletedButton();
+      renderTaskCount();
+    }
   });
 
   // Strikethrough if task is completed
@@ -224,4 +232,37 @@ function manageClearCompletedButton()
   else {
     clearCompletedButton.style.display = 'block';
   }
+}
+
+function confirmDeletion()
+{
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+
+    document.body.appendChild(overlay);
+    overlay.appendChild(modal);
+
+    modal.innerHTML = `
+      <p>Are you sure you want to delete this task?</p>
+      <button class="confirm">Yes</button>
+      <button class="cancel">No</button>
+    `;
+
+    const confirmButton = document.querySelector('.confirm');
+    const cancelButton = document.querySelector('.cancel');
+
+    confirmButton.addEventListener('click', () => {
+      overlay.remove();
+      resolve(true);
+    });
+
+    cancelButton.addEventListener('click', () => {
+      overlay.remove();
+      resolve(false);
+    });
+  });
 }
