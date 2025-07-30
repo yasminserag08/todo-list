@@ -10,7 +10,21 @@
   </head>
   <body>
     <div class="sidebar">
-      <button id="mode-toggle"></button>
+      <label class="switch">
+        <input id="mode-toggle" type="checkbox" checked>
+        <span class="slider round">
+          <!-- Sun icon -->
+          <svg class="icon sun" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M12 4.5a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1zm6.36 1.64a1 1 0 1 1 1.41 1.41l-.01.01a1 1 0 0 1-1.4-1.43zM18.5 11a1 1 0 1 1 0 2h-.01a1 1 0 1 1 0-2H18.5zM4.5 11a1 1 0 1 1 0 2H4.49a1 1 0 1 1 0-2H4.5zm1.72-4.36a1 1 0 0 1 1.41-1.41l.01.01a1 1 0 0 1-1.42 1.41zM12 7a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm6.36 10.86a1 1 0 0 1-1.41 1.41l-.01-.01a1 1 0 1 1 1.42-1.41zM12 19.5a1 1 0 0 1-1 1h-.01a1 1 0 1 1 0-2h.01a1 1 0 0 1 1 1zm-6.36-1.64a1 1 0 1 1-1.41-1.41l.01-.01a1 1 0 0 1 1.4 1.43z"/>
+          </svg>
+          <!-- Moon icon -->
+          <svg class="icon moon" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M21 12.79A9 9 0 0 1 12.21 3 7 7 0 0 0 12 17a7 7 0 0 0 9-4.21z"/>
+          </svg>
+        </span>
+      </label>
       <div class="sidebar-header">FILTERS</div>
       <div class="sidebar-item">Completed Tasks</div>
       <div class="sidebar-item">Active Tasks</div>
