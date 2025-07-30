@@ -151,7 +151,7 @@ input[type="text"]:focus
 #task-list li
 {
   display: grid;
-  grid-template-columns: 1% 80% auto 8%;
+  grid-template-columns: 1% 80% auto auto;
   max-width: 50rem;
   margin-bottom: 0.2rem;
   padding: 0.5rem;
@@ -424,4 +424,67 @@ input:checked + .slider .moon {
 .star-button.starred
 {
   color: gold;
+}
+
+@media (max-width: 1050px) {
+  body {
+    padding-left: 0;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+    padding-bottom: 1rem;
+  }
+
+  .sidebar-header {
+    display: none;
+  }
+
+  .sidebar-item {
+    flex: 1 1 30%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    width: 90%;
+    margin: auto;
+  }
+
+  #new-task {
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  #task-count,
+  #clear-completed {
+    margin: 1rem auto;
+    width: 90%;
+    text-align: center;
+  }
+
+  #task-list li {
+    grid-template-columns: 10% 1fr auto auto;
+    padding: 0.5rem;
+    max-width: 90%;
+    margin: auto;
+  }
+
+  #active-filter {
+    margin-left: 5rem;
+  }
+
 }
