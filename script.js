@@ -2,9 +2,9 @@
 const taskInput = document.querySelector('#new-task');
 const addButton = document.querySelector('.add-button');
 const taskList = document.querySelector('#task-list');
-const allButton = document.querySelector('.all-button');
-const activeButton = document.querySelector('.active-button');
-const completedButton = document.querySelector('.completed-button');
+const allFilter = document.querySelector('#all-filter');
+const activeFilter = document.querySelector('#active-filter');
+const completedFilter = document.querySelector('#completed-filter');
 const clearCompletedButton = document.querySelector('#clear-completed');
 const taskCount = document.querySelector('#task-count');
 const modeToggle = document.querySelector('#mode-toggle');
@@ -181,26 +181,26 @@ function renderTask(task) {
 
 }
 
-// allButton.addEventListener('click', () => {
-//   taskList.innerHTML = '';
-//   tasks.forEach(task => {
-//     renderTask(task);
-//   });
-// });
+allFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    renderTask(task);
+  });
+});
 
-// activeButton.addEventListener('click', () => {
-//   taskList.innerHTML = '';
-//   tasks.forEach(task => {
-//     if(!task.completed) { renderTask(task); }
-//   });
-// });
+activeFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(!task.completed) { renderTask(task); }
+  });
+});
 
-// completedButton.addEventListener('click', () => {
-//   taskList.innerHTML = '';
-//   tasks.forEach(task => {
-//     if(task.completed) { renderTask(task); }
-//   });
-// });
+completedFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(task.completed) { renderTask(task); }
+  });
+});
 
 taskInput.addEventListener('keydown', function(event) {
   const key = event.key;

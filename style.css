@@ -364,3 +364,32 @@ input:checked + .slider .moon {
   opacity: 0;
 }
 
+.sidebar-header
+{
+  padding: 10px;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-right: 5px;
+}
+
+.sidebar-item
+{
+  padding: 8px;
+  margin-right: 5px;
+}
+
+.sidebar-item:hover,
+#upcoming:hover,
+#inbox:hover
+{
+  background-color: var(--highlight);
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.sidebar-item:active,
+#upcoming:active,
+#inbox:active
+{
+  opacity: 0.7;
+}
