@@ -162,26 +162,26 @@ function renderTask(task) {
 
 }
 
-allButton.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    renderTask(task);
-  });
-});
+// allButton.addEventListener('click', () => {
+//   taskList.innerHTML = '';
+//   tasks.forEach(task => {
+//     renderTask(task);
+//   });
+// });
 
-activeButton.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    if(!task.completed) { renderTask(task); }
-  });
-});
+// activeButton.addEventListener('click', () => {
+//   taskList.innerHTML = '';
+//   tasks.forEach(task => {
+//     if(!task.completed) { renderTask(task); }
+//   });
+// });
 
-completedButton.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    if(task.completed) { renderTask(task); }
-  });
-});
+// completedButton.addEventListener('click', () => {
+//   taskList.innerHTML = '';
+//   tasks.forEach(task => {
+//     if(task.completed) { renderTask(task); }
+//   });
+// });
 
 taskInput.addEventListener('keydown', function(event) {
   const key = event.key;
@@ -272,14 +272,14 @@ function confirmDeletion()
   });
 }
 
-modeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  if(localStorage.getItem('mode') === 'light') 
-  {
-    localStorage.setItem('mode', 'dark');
-  }
-  else 
-  {
-    localStorage.setItem('mode', 'light');
-  }
-});
+// modeToggle.addEventListener('click', () => {
+//   document.body.classList.toggle('dark-mode');
+//   if(localStorage.getItem('mode') === 'light') 
+//   {
+//     localStorage.setItem('mode', 'dark');
+//   }
+//   else 
+//   {
+//     localStorage.setItem('mode', 'light');
+//   }
+// });

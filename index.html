@@ -9,23 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <h1>Todo List</h1>
+    <div class="sidebar">
+      Settings & filters here
+    </div>
+    <h1>Today</h1>
 
     <div class="header">
-    <button id="mode-toggle">
-      <img src="night-mode.png" class="mode-image">
-    </button>
       <input id="new-task" autocomplete="off" placeholder="Title">
       <button class="add-button">ADD</button>
     </div>
 
     <button id="task-count" class="tooltip"></button>
 
-    <div class="filter-buttons">
-      <button class="all-button">All</button>
-      <button class="active-button">Active</button>
-      <button class="completed-button">Completed</button>
-    </div>
     <ul id="task-list"></ul>
     <button id="clear-completed">Clear completed tasks</button>
     <script src="script.js"></script>
