@@ -2,6 +2,8 @@
 {
   --bg-color: white;
   --text-color: black;
+  --highlight: rgb(227, 236, 255);
+  --new-task: rgb(228, 228, 228);
 }
 
 body
@@ -22,6 +24,8 @@ body.dark-mode
 {
   --bg-color: black;
   --text-color: white;
+  --highlight: rgba(75, 132, 255, 0.633);
+  --new-task: rgba(228, 228, 228, 0.359);
 }
 
 .header 
@@ -37,7 +41,7 @@ body.dark-mode
   max-width: 30rem;
   padding-left: 0.5rem;
   border: none;
-  background-color: rgb(228, 228, 228);
+  background-color: var(--new-task);
   transition: opacity 1ms;
 }
 
@@ -48,7 +52,8 @@ input[type="text"]:focus
   font-size: 1rem;
   border: none;
   outline: none;
-  background-color: rgb(227, 236, 255);
+  background: none;
+  color: var(--text-color);
   opacity: 0.7;
 }
 
@@ -57,13 +62,19 @@ input[type="text"]:focus
   height: 2rem;
 }
 
+#new-task:focus
+{
+  background-color: var(--highlight);
+  color: var(--text-color);
+}
+
 .add-button,
 .confirm,
 .cancel
 {
   width: 5rem;
   border: 0.01rem solid rgb(75, 132, 255);
-  background-color: white;
+  background-color: var(--bg-color);
   color: rgb(75, 132, 255);
   transition: background-color 1ms;
   transition: color 1ms;
@@ -101,10 +112,10 @@ input[type="text"]:focus
   padding: 0.5rem;
   padding-left: 5rem;
   padding-right: 5rem;
-  background-color: rgb(227, 236, 255); 
+  background-color: var(--highlight); 
   border: none;
   border-radius: 5%;
-  color: black;
+  color: var(--text-color);
 }
 
 .filter-buttons 
@@ -151,7 +162,7 @@ input[type="text"]:focus
 
 #task-list li:hover
 {
-  background-color: rgb(227, 236, 255);
+  background-color: var(--highlight);
 }
 
 .checkbox 
@@ -208,8 +219,8 @@ span
   padding: 0.5rem;
   border-radius: 5%;
   width: auto;
+  background-color: var(--bg-color);
   border: 0.01rem solid rgb(75, 132, 255);
-  background-color: white;
   color: rgb(75, 132, 255);
   transition: background-color 1ms;
   transition: color 1ms;
@@ -233,7 +244,8 @@ span
 
 .modal
 {
-  background-color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   padding-bottom: 15px;
   padding-left: 10px;
   padding-right: 150px;

@@ -10,9 +10,15 @@
   </head>
   <body>
     <div class="sidebar">
-      Settings & filters here
+      <button id="mode-toggle"></button>
+      <div class="sidebar-header">FILTERS</div>
+      <div class="sidebar-item">Completed Tasks</div>
+      <div class="sidebar-item">Active Tasks</div>
+      <div class="sidebar-item">Starred Tasks</div>
+      <div class="sidebar-header">INBOX</div>
+      <div class="sidebar-header">UPCOMING</div>
     </div>
-    <h1>Today</h1>
+    <h1 id="current-date">Today</h1>
 
     <div class="header">
       <input id="new-task" autocomplete="off" placeholder="Title">
