@@ -5,9 +5,11 @@ const taskList = document.querySelector('#task-list');
 const allFilter = document.querySelector('#all-filter');
 const activeFilter = document.querySelector('#active-filter');
 const completedFilter = document.querySelector('#completed-filter');
+const starredFilter = document.querySelector('#starred-filter');
 const clearCompletedButton = document.querySelector('#clear-completed');
 const taskCount = document.querySelector('#task-count');
 const modeToggle = document.querySelector('#mode-toggle');
+const header = document.querySelector('#header');
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -198,6 +200,7 @@ allFilter.addEventListener('click', () => {
   tasks.forEach(task => {
     renderTask(task);
   });
+  header.innerHTML = 'All';
 });
 
 activeFilter.addEventListener('click', () => {
@@ -205,6 +208,7 @@ activeFilter.addEventListener('click', () => {
   tasks.forEach(task => {
     if(!task.completed) { renderTask(task); }
   });
+  header.innerHTML = 'Active Tasks';
 });
 
 completedFilter.addEventListener('click', () => {
@@ -212,6 +216,15 @@ completedFilter.addEventListener('click', () => {
   tasks.forEach(task => {
     if(task.completed) { renderTask(task); }
   });
+  header.innerHTML = 'Completed Tasks';
+});
+
+starredFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(task.starred) { renderTask(task); }
+  });
+  header.innerHTML = 'Starred tasks';
 });
 
 taskInput.addEventListener('keydown', function(event) {
