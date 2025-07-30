@@ -12,5 +12,4 @@ A simple, browser-based to-do list built with HTML, CSS, and JavaScript.
 - HTML
 - CSS
 - JavaScript
-- LocalStorage
 
