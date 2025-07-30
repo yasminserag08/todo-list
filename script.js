@@ -31,8 +31,9 @@ window.addEventListener('DOMContentLoaded', function(event) {
 addButton.addEventListener('click', function(event) {
   // Add task to tasks list
   const task = {
-  text: taskInput.value,
-  completed: false
+    text: taskInput.value,
+    completed: false,
+    starred: false
   };
   tasks.push(task); 
   // Update the localStorage
@@ -62,11 +63,21 @@ function renderTask(task) {
   span.textContent = task.text;
   li.appendChild(span);
 
+    // Create a star button for the task
+  const starButton = document.createElement('button');
+  starButton.className = 'star-button';
+  starButton.innerHTML = `
+    <svg viewBox="0 0 24 24" class="star-icon" fill="currentColor">
+    <path d="M12 2l3.09 6.26L22 9.27l-5.5 5.36L17.82 22 12 18.27 6.18 22 7.5 14.63 2 9.27l6.91-1.01L12 2z"/>
+    </svg>`;
+    li.appendChild(starButton);
+
   // Create a delete button for the task
   const deleteButton = document.createElement('button');
   deleteButton.className = 'delete-button';
   li.appendChild(deleteButton);
   deleteButton.textContent = 'Delete';
+
 
   // Add functionality for the delete button
   deleteButton.addEventListener('click', async function() {
@@ -92,6 +103,11 @@ function renderTask(task) {
     const checkbox = li.querySelector('.checkbox')
     span.style.textDecoration = 'line-through';
     checkbox.checked = true;
+  }
+
+  // Make the star gold if it's starred
+  if(task.starred) {
+    starButton.classList.add('starred');
   }
   
   // Add event listener to each dynamically created checkbox
@@ -159,6 +175,20 @@ function renderTask(task) {
         input.blur();
       }
     });
+  });
+
+  starButton.addEventListener('click', () => {
+    starButton.classList.toggle('starred');
+    if(task.starred === false)
+    {
+      task.starred = true;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    else
+    {
+      task.starred = false;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    } 
   });
 
 }

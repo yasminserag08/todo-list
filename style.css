@@ -151,7 +151,7 @@ input[type="text"]:focus
 #task-list li
 {
   display: grid;
-  grid-template-columns: 1rem 43rem auto 1rem;
+  grid-template-columns: 1% 80% auto 8%;
   max-width: 50rem;
   margin-bottom: 0.2rem;
   padding: 0.5rem;
@@ -390,4 +390,38 @@ input:checked + .slider .moon {
 #inbox:active
 {
   opacity: 0.7;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--bg-color);
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.star-icon 
+{
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s;
+}
+
+.star-icon path 
+{
+  stroke: var(--text-color);
+  stroke-width: 0.75;
+}
+
+.star-button:hover .star-icon 
+{
+  transform: scale(1.05);
+  color: gold;
+}
+
+.star-button.starred
+{
+  color: gold;
 }
