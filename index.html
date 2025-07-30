@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <!-- SIDEBAR -->
     <div class="sidebar">
+      <!-- Mode toggle -->
       <label class="switch">
         <input id="mode-toggle" type="checkbox" checked>
         <span class="slider round">
@@ -25,20 +27,22 @@
           </svg>
         </span>
       </label>
+      <!-- Filters -->
       <div class="sidebar-header">FILTERS</div>
       <div class="sidebar-item" id="all-filter">All</div>
       <div class="sidebar-item" id="completed-filter">Completed Tasks</div>
       <div class="sidebar-item" id="active-filter">Active Tasks</div>
       <div class="sidebar-item" id="starred-filter">Starred Tasks</div>
     </div>
+
+    <!-- MAIN SECTION -->
     <h1 id="header">All</h1>
     <div class="header">
       <input id="new-task" autocomplete="off" placeholder="Title">
       <button class="add-button">ADD</button>
     </div>
-
     <button id="task-count" class="tooltip"></button>
-
+    <!-- JavaScript appends tasks to this ul -->
     <ul id="task-list"></ul>
     <button id="clear-completed">Clear completed tasks</button>
     <script src="script.js"></script>

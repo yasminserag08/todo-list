@@ -37,12 +37,14 @@ addButton.addEventListener('click', function(event) {
     completed: false,
     starred: false
   };
+  // Don't add empty tasks
+  if(taskInput.value === '') { return; }
+  if(header.innerHTML === 'Completed Tasks') { task.completed = true; }
+  else if(header.innerHTML === 'Starred Tasks') { task.starred = true; }
   tasks.push(task); 
   // Update the localStorage
   localStorage.setItem('tasks', JSON.stringify(tasks));
-  // Don't add empty tasks
-  if(taskInput.value === '') { return; }
-  else { renderTask(task); }
+  renderTask(task); 
   renderTaskCount();
 });
 

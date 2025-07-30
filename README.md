@@ -1,15 +1,20 @@
-# To-Do List App
-A simple, browser-based to-do list built with HTML, CSS, and JavaScript. 
+# Todo List App
+A Todo List web application built with **HTML**, **CSS**, and **JavaScript**, featuring light/dark mode, task filters, and a star system to mark important tasks.
 
 ## Features
-- Add new tasks  
-- Mark tasks as complete 
-- Delete tasks  
-- Filter tasks 
-
+- Add and delete tasks
+- Edit tasks by double click
+- Toggle between light and dark mode
+- Star tasks to mark them as important
+- Filter by:
+  - All tasks
+  - Completed tasks
+  - Active (incomplete) tasks
+  - Starred tasks
+- Clear all completed tasks
+- Tasks persist on page reload
 
 ## Technologies Used
-- HTML
-- CSS
-- JavaScript
-
+- HTML5
+- CSS3 
+- JavaScript (Vanilla)
