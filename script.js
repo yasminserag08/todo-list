@@ -8,28 +8,11 @@ const completedFilter = document.querySelector('#completed-filter');
 const clearCompletedButton = document.querySelector('#clear-completed');
 const taskCount = document.querySelector('#task-count');
 const modeToggle = document.querySelector('#mode-toggle');
-const dateHeading = document.querySelector('#current-date');
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let completedCount = JSON.parse(localStorage.getItem('completedCount')) || 0;
-const today = new Date();
 
-function renderDate()
-{
-  const now = new Date();
-  const formattedDate = now.toDateString();
-  const isToday = 
-    now.getDate() === today.getDate();
-  if(isToday)
-  {
-    dateHeading.html = 'Today';
-  }
-  else
-  {
-    dateHeading.html = formattedDate;
-  }
-}
 
 // Render all tasks in localStorage when DOM loads
 window.addEventListener('DOMContentLoaded', function(event) {
@@ -42,7 +25,6 @@ window.addEventListener('DOMContentLoaded', function(event) {
   }
   renderTaskCount();
   manageClearCompletedButton();
-  renderDate();
 });
 
 // Add event listener to the add button
@@ -302,5 +284,3 @@ modeToggle.addEventListener('click', () => {
     localStorage.setItem('mode', 'light');
   }
 });
-
-setInterval(renderDate, 60000);

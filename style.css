@@ -379,7 +379,6 @@ input:checked + .slider .moon {
 }
 
 .sidebar-item:hover,
-#upcoming:hover,
 #inbox:hover
 {
   background-color: var(--highlight);
@@ -388,7 +387,6 @@ input:checked + .slider .moon {
 }
 
 .sidebar-item:active,
-#upcoming:active,
 #inbox:active
 {
   opacity: 0.7;
