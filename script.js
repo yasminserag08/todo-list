@@ -7,6 +7,7 @@ const activeButton = document.querySelector('.active-button');
 const completedButton = document.querySelector('.completed-button');
 const clearCompletedButton = document.querySelector('#clear-completed');
 const taskCount = document.querySelector('#task-count');
+const modeToggle = document.querySelector('#mode-toggle');
 
 // Array of tasks in localStorage
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -17,6 +18,10 @@ window.addEventListener('DOMContentLoaded', function(event) {
   tasks.forEach(task => {
     renderTask(task);
   });
+  if(localStorage.getItem('mode') === 'dark')
+  {
+    document.body.classList.add('dark-mode');
+  }
   renderTaskCount();
   manageClearCompletedButton();
 });
@@ -266,3 +271,15 @@ function confirmDeletion()
     });
   });
 }
+
+modeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  if(localStorage.getItem('mode') === 'light') 
+  {
+    localStorage.setItem('mode', 'dark');
+  }
+  else 
+  {
+    localStorage.setItem('mode', 'light');
+  }
+});

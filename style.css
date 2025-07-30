@@ -1,8 +1,22 @@
+:root
+{
+  --bg-color: white;
+  --text-color: black;
+}
+
 body,
 button,
 #new-task
 {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'DM Sans';
+}
+
+body.dark-mode
+{
+  --bg-color: black;
+  --text-color: white;
 }
 
 .header 
@@ -84,6 +98,7 @@ input[type="text"]:focus
   background-color: rgb(227, 236, 255); 
   border: none;
   border-radius: 5%;
+  color: black;
 }
 
 .filter-buttons 
@@ -110,14 +125,8 @@ input[type="text"]:focus
   transition: opacity 1ms;
 }
 
-.active-button
-{
-  margin-right: 0.5rem;
-}
-
 #task-list 
 {
-  flex-direction: column;
   list-style: none;
   padding: 0;
 }
@@ -146,7 +155,7 @@ input[type="text"]:focus
 
 .checkbox:checked::after {
   content: '✔';
-  color: #555;
+  color: var(--text-color);
   position: absolute;
   left: 2px;
   top: -2px;
@@ -177,7 +186,6 @@ span
 {
   display: block;
   margin: 0 auto;
-  margin-left: 43%;
   padding: 0.5rem;
   border-radius: 5%;
   width: auto;
@@ -211,4 +219,16 @@ span
   padding-left: 10px;
   padding-right: 150px;
   border-radius: 5px;
+}
+
+.mode-image 
+{
+  width: 20px;
+  height: 20px;
+}
+
+#mode-toggle 
+{
+  margin-right: 10px;
+  background-color: white;
 }
