@@ -39,13 +39,18 @@ addButton.addEventListener('click', function(event) {
   };
   // Don't add empty tasks
   if(taskInput.value === '') { return; }
-  if(header.innerHTML === 'Completed Tasks') { task.completed = true; }
+  if(header.innerHTML === 'Completed Tasks') 
+  { 
+    task.completed = true;
+    completedCount++; 
+  }
   else if(header.innerHTML === 'Starred Tasks') { task.starred = true; }
   tasks.push(task); 
   // Update the localStorage
   localStorage.setItem('tasks', JSON.stringify(tasks));
   renderTask(task); 
   renderTaskCount();
+  manageClearCompletedButton();
 });
 
 function renderTask(task) {
@@ -143,6 +148,14 @@ function renderTask(task) {
         }
       });
     }
+    if(!task.completed && header.innerHTML === 'Completed Tasks')
+    {
+      li.remove();
+    }
+    if(task.completed && header.innerHTML === 'Active Tasks')
+    {
+      li.remove();
+    }
   });
 
   // Add event listener to each dynamically created <span> element
@@ -193,6 +206,11 @@ function renderTask(task) {
       task.starred = false;
       localStorage.setItem('tasks', JSON.stringify(tasks));
     } 
+
+    if(!task.starred && header.innerHTML === 'Starred Tasks')
+    {
+      li.remove();
+    }
   });
 
 }
@@ -203,6 +221,7 @@ allFilter.addEventListener('click', () => {
     renderTask(task);
   });
   header.innerHTML = 'All';
+  manageClearCompletedButton();
 });
 
 activeFilter.addEventListener('click', () => {
@@ -211,6 +230,7 @@ activeFilter.addEventListener('click', () => {
     if(!task.completed) { renderTask(task); }
   });
   header.innerHTML = 'Active Tasks';
+  manageClearCompletedButton();
 });
 
 completedFilter.addEventListener('click', () => {
@@ -219,6 +239,7 @@ completedFilter.addEventListener('click', () => {
     if(task.completed) { renderTask(task); }
   });
   header.innerHTML = 'Completed Tasks';
+  manageClearCompletedButton();
 });
 
 starredFilter.addEventListener('click', () => {
@@ -226,7 +247,7 @@ starredFilter.addEventListener('click', () => {
   tasks.forEach(task => {
     if(task.starred) { renderTask(task); }
   });
-  header.innerHTML = 'Starred tasks';
+  header.innerHTML = 'Starred Tasks';
 });
 
 taskInput.addEventListener('keydown', function(event) {
@@ -276,11 +297,14 @@ clearCompletedButton.addEventListener('click', () => {
 
 function manageClearCompletedButton()
 {
-  if(completedCount === 0)
+  if(completedCount === 0 || 
+    (header.innerHTML === 'Active Tasks') || 
+    (taskList.innerHTML === ''))
   {
     clearCompletedButton.style.display = 'none';
   }
-  else {
+  else 
+  {
     clearCompletedButton.style.display = 'block';
   }
 }
