@@ -47,12 +47,6 @@ button,
   transition: opacity 1ms;
 }
 
-#new-task:focus
-{
-  background-color: var(--highlight);
-  color: var(--text-color);
-}
-
 #new-task:focus,
 input[type="text"]:focus
 {
@@ -63,6 +57,12 @@ input[type="text"]:focus
   background: none;
   color: var(--text-color);
   opacity: 0.7;
+}
+
+#new-task:focus
+{
+  background-color: var(--highlight);
+  color: var(--text-color);
 }
 
 .add-button,
