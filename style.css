@@ -278,13 +278,14 @@ span
   padding: 10px;
   font-weight: 500;
   opacity: 0.8;
-  margin-right: 7px;
+  margin-left: 10px;
 }
 
 .sidebar-item
 {
   padding: 8px;
-  margin-right: 7px;
+  margin-left: 10px;
+  margin-right: 5px;
 }
 
 .sidebar-item:hover,
@@ -310,13 +311,13 @@ span
 
 #mode-toggle 
 {
-  margin-right: 10px;
+  margin-left: 10px;
   background-color: white;
 }
 
 .switch {
   margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 17px;
   position: relative;
   display: inline-block;
   width: 60px;
