@@ -11,10 +11,8 @@ const taskCount = document.querySelector('#task-count');
 const modeToggle = document.querySelector('#mode-toggle');
 const header = document.querySelector('#header');
 
-// Array of tasks in localStorage
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Array of tasks in localStorage
 let completedCount = JSON.parse(localStorage.getItem('completedCount')) || 0;
-
 
 // Render all tasks in localStorage when DOM loads
 window.addEventListener('DOMContentLoaded', function(event) {
@@ -39,15 +37,27 @@ addButton.addEventListener('click', function(event) {
   };
   // Don't add empty tasks
   if(taskInput.value === '') { return; }
+
+  // If completed tasks filter is on
   if(header.innerHTML === 'Completed Tasks') 
   { 
+    // Automatically mark task as completed and increment completed tasks count
     task.completed = true;
     completedCount++; 
   }
-  else if(header.innerHTML === 'Starred Tasks') { task.starred = true; }
+  
+  // If starred tasks filter is on
+  else if(header.innerHTML === 'Starred Tasks') 
+  { 
+    // Automatically mark task as starred
+    task.starred = true; 
+  } 
+
+  // Add the task to the array
   tasks.push(task); 
   // Update the localStorage
   localStorage.setItem('tasks', JSON.stringify(tasks));
+  // Render all required elements
   renderTask(task); 
   renderTaskCount();
   manageClearCompletedButton();
@@ -72,7 +82,7 @@ function renderTask(task) {
   span.textContent = task.text;
   li.appendChild(span);
 
-    // Create a star button for the task
+  // Create a star button for the task
   const starButton = document.createElement('button');
   starButton.className = 'star-button';
   starButton.innerHTML = `
@@ -148,12 +158,16 @@ function renderTask(task) {
         }
       });
     }
+    // If completed tasks filter is on and the task is not completed
     if(!task.completed && header.innerHTML === 'Completed Tasks')
     {
+      // Automatically remove task from list
       li.remove();
     }
+    // If active tasks filter is on and the task is completed
     if(task.completed && header.innerHTML === 'Active Tasks')
     {
+      // Automatically remove task from list
       li.remove();
     }
   });
@@ -165,21 +179,9 @@ function renderTask(task) {
     input.value = span.textContent;
     li.replaceChild(input, span);
     input.focus();
-    cancelEdit = false;
+    cancelEdit = false; // Set to true when esc is pressed
 
-    input.addEventListener('blur', () => {
-      if(cancelEdit)
-      {
-        li.replaceChild(span, input);
-        return;
-      }
-      task.text = input.value;
-      span.textContent = input.value;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-      li.replaceChild(span, input);
-    });
-
-    input.addEventListener('keydown', function(event) {
+      input.addEventListener('keydown', function(event) {
       const key = event.key;
       if(key == 'Enter')
       {
@@ -191,6 +193,21 @@ function renderTask(task) {
         cancelEdit = true;
         input.blur();
       }
+    });
+
+    input.addEventListener('blur', () => {
+      // If it's esc that caused blur
+      if(cancelEdit) 
+      {
+        // Return the original span element & exit function 
+        li.replaceChild(span, input);
+        return;
+      }
+      // Otherwise let the edit take place
+      task.text = input.value;
+      span.textContent = input.value;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      li.replaceChild(span, input);
     });
   });
 
@@ -207,49 +224,16 @@ function renderTask(task) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
     } 
 
+    // If task is not starred and the starred tasks filter is on
     if(!task.starred && header.innerHTML === 'Starred Tasks')
     {
+      // Automatically remove task from list
       li.remove();
     }
   });
-
 }
 
-allFilter.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    renderTask(task);
-  });
-  header.innerHTML = 'All';
-  manageClearCompletedButton();
-});
-
-activeFilter.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    if(!task.completed) { renderTask(task); }
-  });
-  header.innerHTML = 'Active Tasks';
-  manageClearCompletedButton();
-});
-
-completedFilter.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    if(task.completed) { renderTask(task); }
-  });
-  header.innerHTML = 'Completed Tasks';
-  manageClearCompletedButton();
-});
-
-starredFilter.addEventListener('click', () => {
-  taskList.innerHTML = '';
-  tasks.forEach(task => {
-    if(task.starred) { renderTask(task); }
-  });
-  header.innerHTML = 'Starred Tasks';
-});
-
+// Allow adding tasks through pressing enter instead of clicking add
 taskInput.addEventListener('keydown', function(event) {
   const key = event.key;
   if(key == 'Enter')
@@ -277,15 +261,19 @@ function renderTaskCount()
   }
 }
 
+// Handle clearCompletedButton
 clearCompletedButton.addEventListener('click', () => {
+  // Empty taskList
   taskList.innerHTML = '';
   tasks.forEach(task => {
     if(task.completed) 
     {
+      // Remove all completed tasks from the array
       tasks = tasks.filter(item => item !== task);
       localStorage.setItem('tasks', JSON.stringify(tasks));
     }
   });
+  // Re-render the task list after editing
   tasks.forEach(task => {
     renderTask(task);
   });
@@ -342,6 +330,7 @@ function confirmDeletion()
   });
 }
 
+// Handle light and dark modes & store user's preference in local storage
 modeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
   if(localStorage.getItem('mode') === 'light') 
@@ -352,4 +341,40 @@ modeToggle.addEventListener('click', () => {
   {
     localStorage.setItem('mode', 'light');
   }
+});
+
+// Filters
+allFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    renderTask(task);
+  });
+  header.innerHTML = 'All';
+  manageClearCompletedButton();
+});
+
+activeFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(!task.completed) { renderTask(task); }
+  });
+  header.innerHTML = 'Active Tasks';
+  manageClearCompletedButton();
+});
+
+completedFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(task.completed) { renderTask(task); }
+  });
+  header.innerHTML = 'Completed Tasks';
+  manageClearCompletedButton();
+});
+
+starredFilter.addEventListener('click', () => {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    if(task.starred) { renderTask(task); }
+  });
+  header.innerHTML = 'Starred Tasks';
 });

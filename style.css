@@ -269,7 +269,8 @@ span
   top: 0; 
   left: 0;
   height: 100%;
-  box-shadow: 5px 5px 18px rgb(201, 211, 211);
+  /* box-shadow: 1px 1px 18px rgb(201, 211, 211); */
+  box-shadow: 1px 1px 18px var(--highlight);
 }
 
 .sidebar-header
@@ -277,13 +278,13 @@ span
   padding: 10px;
   font-weight: 500;
   opacity: 0.8;
-  margin-right: 5px;
+  margin-right: 7px;
 }
 
 .sidebar-item
 {
   padding: 8px;
-  margin-right: 5px;
+  margin-right: 7px;
 }
 
 .sidebar-item:hover,
